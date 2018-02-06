@@ -45,10 +45,11 @@ if __name__ == '__main__':
         log.startLogging(open(args.logfile, 'a'))
         print("Started logging to file %s" % args.logfile)
 
-    wsUri = 'ws://%s:%i' % (args.host, args.port)
+    print("binding to ws://%s:%i" % (args.host, args.port))
+    wsUri = u"ws://%s:%i" % (args.host, args.port)
 
-    factory = WebSocketServerFactory(wsUri, debug=False)
+    factory = WebSocketServerFactory(wsUri)
     factory.protocol = PushjetWebSocketBase
 
-    reactor.listenTCP(args.port, factory)
+    reactor.listenTCP(int(args.port), factory)
     reactor.run()
