@@ -25,6 +25,7 @@ class PushjetProtocolBase(object):
     def onZmqMessage(self, data):
         tag, message = data.split(' ', 1)
         self.sendMessage(message)
+        print(tag,"--",message)
 
         decoded = json.loads(message)
         if 'message' in decoded:
